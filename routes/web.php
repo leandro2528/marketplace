@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\VendorController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,3 +32,18 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+
+Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->middleware(['auth', 'admin'])->name('admin-dashboard');
+Route::get('vendor/dashboard', [VendorController::class, 'dashboard'])->middleware(['auth', 'vendor'])->name('vendor-dashboard');
+
+
+    Route::get('/vendor/dashboard', function () {
+        return view('vendor.dashboard');
+    })->name('vendor.dashboard');
+
+
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard'); // ou outro controller/view real que você tenha
+})->name('admin.dashboard');

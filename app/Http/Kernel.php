@@ -2,7 +2,12 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\Admin;
+use App\Http\Middleware\Vendor;
+use App\Http\Middleware\User;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+
+use Iluminate\Support\Facades\Auth;
 
 class Kernel extends HttpKernel
 {
@@ -45,6 +50,12 @@ class Kernel extends HttpKernel
         ],
     ];
 
+    protected $routeMiddleware = [
+        // outros middlewares
+        'admin' => \App\Http\Middleware\Admin::class,
+        'vendor' => \App\Http\Middleware\Vendor::class,
+        'user' => \App\Http\Middleware\User::class
+    ];
     /**
      * The application's middleware aliases.
      *
